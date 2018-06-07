@@ -1,0 +1,65 @@
+{ "questions": [
+	{
+		"body": "What is the largest planet?",
+		"ideal_answer": ["Jupiter is the largest planet in the solar system"],
+		"snippets": [
+			{
+				"text": "Jupiter is the fifth planet from the Sun. "
+			},
+            {
+                "text": "Jupiter is the largest planet in the Solar System. Jupiter is a giant planet with a mass one-thousandth that of the Sun, but two-and-a-half times that of all the other planets in the Solar System combined."
+            },
+			{
+				"text": "Jupiter is primarily composed of hydrogen with a quarter of its mass being helium, though helium comprises only about a tenth of the number of molecules."
+			}
+		]
+	},
+	{
+		"body": "What is YouTube?",
+		"ideal_answer":["YouTube is an American video-sharing website."],
+		"snippets": [
+			{
+                "text": "YouTube is an American video-sharing website headquartered in San Bruno, California."
+            }
+		]
+	},
+    {
+        "body": "Who founded Google?",
+        "ideal_answer":["Google was founded by Larry Page and Sergey Brin."],
+        "snippets":[
+            {
+                "text": "Google was founded by Larry Page and Sergey Brin in 1998."
+            }
+        ]
+    },
+    {
+        "body": "What is the meaning of life?",
+        "ideal_answer":["There is no answer to this question"],
+        "snippets":[
+            {
+                "text": "The meaning of life is to chase your dreams"
+            },
+            {
+                "text": "The meaning of life is nothing"
+            },
+            {
+                "text": "The meaning of life is to become the person you've always wanted to be."
+            }
+        ]
+    },
+    {
+        "body": "Who is the richest person in the world?",
+        "ideal_answer":["The richest person in the world is Jeff Bezos with 112 billion dollars."],
+        "snippets":[
+            {
+                "text": "The richest person in the world is Jeff Bezos with 112 billion dollars."
+            },
+            {
+                "text": "Jeffrey Bezos is an American technology entrepreneur, investor, and philanthropist, who is best known as the founder, chairman, and chief executive officer of Amazon, the world's largest online shopping retailer."
+            },
+            {
+                "text": "We are in the year 2018"
+            }
+        ]
+    }
+]}
