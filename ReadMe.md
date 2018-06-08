@@ -26,13 +26,16 @@ En este proyecto hemos optado por implementar un sistema con un enfoque distinto
 Además, el sistema  implementado, es adaptable a múltiples dominios. Esto implica que tiene la capacidad de utilizar distintas fuentes de información textual a la hora de responder a una consulta introducida por el usuario. Esta funcionalidad permite la resolución de consultas de distintos ámbitos y dominios, a la vez que facilita considerablemente la inserción de nuevas fuentes de información textual.
 
 Para realizar esta implementación, este proyecto consta de varias partes diferenciadas: 
- 	-Análisis de la consulta introducida: se realiza un análisis sintáctico y semántico de la consulta introducida por el usuario. 
+
+ 	
+  -Análisis de la consulta introducida: se realiza un análisis sintáctico y semántico de la consulta introducida por el usuario. 
   
- 	-Obtención información textual: se buscan documentos que contengan las palabras clave de la consulta introducida y, por lo tanto, potencialmente contengan la respuesta a la consulta.
+ 
+  -Obtención información textual: se buscan documentos que contengan las palabras clave de la consulta introducida y, por lo tanto, potencialmente contengan la respuesta a la consulta.
   
- 	-Obtención de la respuesta: se busca en dichos documentos el fragmento que responde a la consulta.
+  -Obtención de la respuesta: se busca en dichos documentos el fragmento que responde a la consulta.
   
- 	-Generación de la respuesta final: se genera una sentencia en lenguaje natural que contiene la respuesta.
+  -Generación de la respuesta final: se genera una sentencia en lenguaje natural que contiene la respuesta.
  
 Por último, se ha ejecutado el sistema sobre un repositorio propio, BioASQ y Simple Wikipedia para evaluar las capacidades de este.
 
@@ -49,7 +52,7 @@ The implementation of this project has been divided in different parts:
  
  -Textual information retrieval:  searches for the documents containing keywords from the introduced query and posibly containing the answer to it.
  
- -Answer retrieval: } searches for the fragment in the documents answering the query.
+ -Answer retrieval:  searches for the fragment in the documents answering the query.
  
  -Generation of the final answer:  generates a natural language sentence containing the answer.
  
