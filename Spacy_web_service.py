@@ -29,7 +29,7 @@ import spacy
 lang = {}
 
 '''
-    This is a method that works like an Api Rest.
+    Method that works like an Api Rest.
     It receives a json with the text you want to parse and a language.
     Returns a json with two lists, one of edges and one of nodes, as well as
     all the attributes that may be useful.
@@ -172,7 +172,8 @@ def set_language(param):
     return {'data':True}
 
 '''
-    Main
+    Launches the servers with the parameters provided.
+    Paramaters must match the indications at the beginning of this file.
 '''
 if __name__ == "__main__":
     arguments = docopt(__doc__)

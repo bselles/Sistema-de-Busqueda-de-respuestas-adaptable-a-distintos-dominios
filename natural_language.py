@@ -4,8 +4,8 @@ import spacy
 from grafeno.transformers.interrogative import open, closed
 
 semantic_analyzer = transformers.get_pipeline([ 'spacy_parse', 'pos_extract', 'pronouns',
-	'nouns', 'thematic', 'phrasal', 'genitive', 'prepositions', 'adjectives', 'adverbs',
-	'negation', 'interrogative', 'copula', 'lenient' ])
+    'nouns', 'thematic', 'phrasal', 'genitive', 'prepositions', 'adjectives', 'adverbs',
+    'negation', 'interrogative', 'copula', 'lenient' ])
 cypher_open_linearizer = linearizers.get_pipeline(['cypher_open_question'])
 cypher_closed_linearizer = linearizers.get_pipeline(['cypher_closed_question'])
 
@@ -17,27 +17,33 @@ from autocorrect import spell
 global nlp
 nlp = spacy.load('en')
 
+'''
+    
+'''
 class Analysis:
 
     def __init__ (self, text, superficial=False,autocorrect=True):
-       
+        # Corrects posible misspelled words in the queries
         if autocorrect:
             self.text = correct_phrase(text)
         else:
             self.text=text
-    
+        
         if superficial:
+            # Parses the query without generating the semantic graph
             self.parse = nlp(self.text)
         else:
+            # Deeply parses the query generating the semantic graph
             self.graph = CG(transformer=semantic_analyzer,text=self.text)
             self.parse = self.graph.spacy_parse
-        
+    
     def similarity (self, other):
         return self.parse.similarity(other.parse)
         
     def content_words (self):
         return [tok.lemma_ for tok in self.parse if not (tok.is_stop or tok.is_punct)]
         
+    # Generates MATCH queries to solve the question introduce by the user
     def cypher_query (self, ground_id):
         if self.graph.question_type==closed:
             return self.graph.linearize(linearizer=cypher_closed_linearizer,
@@ -46,16 +52,19 @@ class Analysis:
             return self.graph.linearize(linearizer=cypher_open_linearizer,
                                         linearizer_args={ 'cypher_extra_params': {'ground_id': ground_id }})
     
+    # Generates CREATE queries to add the information to the NEO4J graph database
     def cypher_create (self, ground_id):
         return self.graph.linearize(linearizer=cypher_create_linearizer,
                                     linearizer_args={ 'cypher_extra_params': {'ground_id': ground_id }})
     
+# Corrects the misspelled words in the sentences
 def correct_phrase(text):
     words = text.split()
     for i in range(len(words)):
         words[i] = spell(words[i])
     return ' '.join(words)
     
+# Generates the natural language sentences from semantic graphs
 def compose_answer (question, answer_graph):
     g = CG(original=question.graph)
     graft(g, question.graph.questions[0], answer_graph, answer_graph.roots[0])
