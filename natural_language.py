@@ -18,7 +18,8 @@ global nlp
 nlp = spacy.load('en')
 
 '''
-    
+    Class that represents an spell-corrected and analyzed text which is going to be used by the system.
+    From this analyzed text we can create cypher querys, get the most relevant terms, etc.    
 '''
 class Analysis:
 
@@ -37,9 +38,11 @@ class Analysis:
             self.graph = CG(transformer=semantic_analyzer,text=self.text)
             self.parse = self.graph.spacy_parse
     
+    #Returns the similarity between this object and another of its same type.
     def similarity (self, other):
         return self.parse.similarity(other.parse)
         
+    #Returns the most relevant terms from the analyzed text represented by this object.
     def content_words (self):
         return [tok.lemma_ for tok in self.parse if not (tok.is_stop or tok.is_punct)]
         
