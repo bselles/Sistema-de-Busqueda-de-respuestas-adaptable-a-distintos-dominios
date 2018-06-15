@@ -3,19 +3,21 @@
 Trabajo de fin de grado de Ingeniería informática del curso académico 2017/2018.
 
 ## Integrantes
--Gabriel Sellés Salvà <gabriese@ucm.es>
 
--Aitor Cayón Ruano    <aitorcay@ucm.es>
+* **Aitor Cayón Ruano** - [aitorcay](https://github.com/aitorcay) - <aitorcay@ucm.es>
 
--Fernando Pérez Gutiérrez  <fernaper@ucm.es>
+* **Javier Cortés Tejada** - [Javi96](https://github.com/Javi96) - <josejaco@ucm.es>
 
--Jose Javier Cortés Tejada  <josejaco@ucm.es>
+* **Gabriel Sellés Salvà** - [bselles](https://github.com/bselles) - <gabriese@ucm.es>
+
+* **Fernando Pérez Gutiérrez** - [fernaper](https://github.com/fernaper) - <fernaper@ucm.es>
+
 
 
 ## Directores
-- Antonio F. G. Sevilla <afgs@ucm.es>
+* **Antonio F. G. Sevilla** - [agarsev](https://github.com/agarsev) - <afgs@ucm.es>
 
-- Alberto Díaz <albertodiaz@fdi.ucm.es>
+* **Alberto Díaz** <albertodiaz@fdi.ucm.es>
 
 ## Resumen 
 
