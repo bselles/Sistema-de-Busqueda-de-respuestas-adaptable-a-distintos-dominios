@@ -1,4 +1,4 @@
-#import psycopg2
+import psycopg2
 import json
 from pymongo import MongoClient, ASCENDING
 from natural_language import Analysis
@@ -6,6 +6,27 @@ from bs4 import BeautifulSoup
 
 
 def connect(db_name):
+    """
+    Establishes the connection with the database.
+
+    This method establishes the connection with the
+    database using psycopg2. If the connection fails
+    return an exception and print a error log, otherwise
+    it creates a database session and return a new
+    connection object.
+
+    Parameters
+    ----------
+    db_name : string
+        Name of the database used
+
+    Returns
+    -------
+    connection
+        Connection object of the database
+
+    """
+
     try: 
         print('\n\nConnection to', db_name)
         db_info=''
@@ -20,6 +41,19 @@ def connect(db_name):
         return None
     
 def disconnect(conn):
+    """
+    Closes the connection with the database.
+
+    This method closes the connection with the
+    database. If it fails print a error log.
+
+    Parameters
+    ----------
+    conn : connection
+        Connection object of the database
+
+    """
+
     try:
         conn.close()
     except Exception as e:
@@ -28,6 +62,21 @@ def disconnect(conn):
         
         
 def createDatabase(dataAmount):
+    """
+    Fills the database with information.
+
+    This method creates a NoSQL database from a SQL.
+    For it uses 2 tables of the SQL database and takes
+    information from both. If the parameters are invalid
+    it take all the information from the database.
+
+    Parameters
+    ----------
+    dataAmount : int
+        Amount of data to be load into the NoSQL database
+
+    """
+
     limit = ''
     try:
         limit = 'limit ' + str(int(dataAmount)/2) if int(dataAmount)>0 else ''
@@ -66,6 +115,28 @@ def createDatabase(dataAmount):
     
 
 def getMostRelevantDocument(q):
+    """
+    Takes the most important document based on input parameters.
+
+    This method takes the most important document of
+    a NoSQL database based on the input params content.
+    For that creates an index in the database based on
+    the content of all documents. Once this is done
+    makes a query with the input terms and return a text
+    chain with the result.
+
+    Parameters
+    ----------
+    q : list(string)
+        List of relevant term to used in the search query
+
+    Returns
+    -------
+    string
+        Most relevant information based on the input
+
+    """
+
     client = MongoClient('')
     query = ' '.join(q.content_words())
     client.tfgchat.test.create_index([('content', "text")])
@@ -74,7 +145,26 @@ def getMostRelevantDocument(q):
     return BeautifulSoup(cursor.get('content'), 'html.parser').get_text()
 
 def retrieveDocument (q):
-    #createDatabase(2000)
+    """
+    Creates a NoSQL database and return the most relevant
+    document on it.
+
+    This method creates a NoQSL database with an arbitrary
+    amount of data.
+
+    Parameters
+    ----------
+    q : list(string)
+        List of relevant term to used in the search query
+
+    Returns
+    -------
+    string
+        Most relevant information based on the input
+
+    """
+
+    createDatabase(2000)
     return getMostRelevantDocument(q)
 
 
