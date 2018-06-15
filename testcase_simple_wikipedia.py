@@ -9,6 +9,29 @@ from grafeno.transformers.interrogative import closed
 
 
 def load(questions_file, answers_file, result_file):
+    """
+    Generates a file with information based on input questions.
+
+    This method creates .json file with information relative
+    to several questions taken as input parameter. For this
+    uses Simple Wikipedia´s API for make several querys, one
+    for each question in questions_file file. Once that the 
+    information has been retrieved it generates a .json file
+    using information from the retrieved documents and 
+    answers_file input file. 
+
+
+    Parameters
+    ----------
+    questions_file : string
+        Questions used in the retrieve information phase
+    answers_file : string
+        Ideal answers for questions in questions_file
+    result_file : string
+        Name of the result file
+
+    """
+
     json_sw = {}
     json_sw['questions'] = []
 
@@ -36,6 +59,24 @@ def load(questions_file, answers_file, result_file):
         
         
 def response(data_file):
+    """
+    Print in console the response for several questions.
+
+    This method generate a response to the quetions in
+    data_file. This one is a .json with quetions, one
+    ideal answer for each quetion and a list (for each
+    quetion too) with the information retrieved from
+    Simple Wikipedia. Once the information have been 
+    loaded it uses natural_language and ground modules
+    to make questions to the knowledge base.
+
+    Parameters
+    ----------
+    data_file : string
+        Name of the input file
+
+    """
+
     with open(data_file,'r') as file:
         data = json.load(file)
         #print(json.dumps(data, indent=4, sort_keys=True))
