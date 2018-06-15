@@ -3,6 +3,11 @@ from bs4 import BeautifulSoup
 import requests
 import json
 
+'''
+   Using the most relevant terms of the query introduced 
+   by the user, it looks for different articles or 
+   documents in which appears this terms  
+'''
 def wikiSearch (terms):
     query = {'action':'query','list':'search',
              'srwhat':'text','srsearch':' '.join(terms),
@@ -10,6 +15,11 @@ def wikiSearch (terms):
             }
     return requests.get("https://simple.wikipedia.org/w/api.php", query)
 
+
+'''
+    Using a page identifier (parameter 'pageId') from a Simple Wikipedia
+    article, it retrieves this article.
+'''
 def wikiRetrieve (pageId):
     query = {'action':'parse','format':'json',
              'prop':'text',
@@ -17,6 +27,10 @@ def wikiRetrieve (pageId):
             }
     return requests.get("https://simple.wikipedia.org/w/api.php", query)
 
+'''
+    It analyzes a document or an article (parameter 'result')
+    to get how good is it to response a certain question (parameter 'q'). 
+'''
 def rankResult (result, q):
     title_similarity = q.similarity(Analysis(result['title'], superficial=True))
     snippet = BeautifulSoup(result['snippet'], 'html.parser')
@@ -27,6 +41,13 @@ def rankResult (result, q):
     match_weight = 0.1
     return title_weight * title_similarity + match_weight * match_score
 
+
+'''
+    Using the documents retrieved (parameter 'response') and the analysis of the question introduced
+    by the user (parameter 'q'), it gets the most relevant documents, the ones which have a 
+    bigger probability to contain the response to the question.
+'''
+
 def getMostRelevantDocument (response, q):
     results = json.loads(response.text)['query']['search']
     best_result = max(results, key=lambda r: rankResult(r, q))
@@ -34,6 +55,11 @@ def getMostRelevantDocument (response, q):
     content = BeautifulSoup(json.loads(page.text)['parse']['text']['*'], 'html.parser')
     return ' '.join(p.get_text() for p in content.find_all('p'))
 
+'''
+    Retrieves different documents which can contain the response to 
+    question introduced by the user.
+    To do it, it uses the result of the analysis of this question (parameter q).
+'''
 def retrieveDocument (q):
     r = wikiSearch(q.content_words())
     doc = getMostRelevantDocument(r, q)
